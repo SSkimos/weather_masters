@@ -24,7 +24,7 @@ def publish(client):
     msg_count = 0
     while True:
         time.sleep(1)
-        msg = f"100 15 200"
+        msg = f"100/15/200"
         result = client.publish(topic, msg)
         # result: [0, 1]
         status = result[0]

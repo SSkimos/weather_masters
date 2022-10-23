@@ -21,7 +21,7 @@ def connect_mqtt() -> mqtt_client:
 
 def subscribe(client: mqtt_client):
     def on_message(client, userdata, msg):
-        data_list = msg.payload.decode().split(' ')
+        data_list = msg.payload.decode().split('/')
         logging.basicConfig(level=logging.INFO, filename="server.log",filemode="w")
         logging.info(f"Temperature = '{data_list[0]}'")
         logging.info(f"Humidity = '{data_list[1]}'")
