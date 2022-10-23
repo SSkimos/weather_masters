@@ -1,6 +1,6 @@
 # python3.6
 
-import random
+import random, logging
 from config import broker, port, topic, client_id, username, password
 
 from paho.mqtt import client as mqtt_client
@@ -22,7 +22,8 @@ def connect_mqtt() -> mqtt_client:
 
 def subscribe(client: mqtt_client):
     def on_message(client, userdata, msg):
-        print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
+        logging.basicConfig(level=logging.INFO, filename="server.log",filemode="w")
+        logging.info(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
 
     client.subscribe(topic)
     client.on_message = on_message
