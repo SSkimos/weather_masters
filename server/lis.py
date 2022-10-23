@@ -12,7 +12,6 @@ def connect_mqtt() -> mqtt_client:
             print("Connected to MQTT Broker!")
         else:
             print("Failed to connect, return code %d\n", rc)
-
     client = mqtt_client.Client(client_id)
     client.username_pw_set(username, password)
     client.on_connect = on_connect
@@ -22,8 +21,11 @@ def connect_mqtt() -> mqtt_client:
 
 def subscribe(client: mqtt_client):
     def on_message(client, userdata, msg):
+        data_list = list(msg.payload.decode())
         logging.basicConfig(level=logging.INFO, filename="server.log",filemode="w")
-        logging.info(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
+        logging.info(f"Temperature = '{data_list[0]}'")
+        logging.info(f"Humidity = '{data_list[1]}'")
+        logging.info(f"Pressure = '{data_list[2]}'")
 
     client.subscribe(topic)
     client.on_message = on_message
