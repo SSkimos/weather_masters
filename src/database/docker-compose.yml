@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  gp_sas_pg_db:
+    container_name: gp_sas_pg_db
+    image: mysql:8.0
+    environment:
+          MYSQL_DATABASE: 'test'
+          MYSQL_USER: 'test_user'
+          MYSQL_PASSWORD: '123'
+          MYSQL_ROOT_PASSWORD: '123'
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./docker-entrypoint-initdb.d/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
