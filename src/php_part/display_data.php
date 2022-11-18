@@ -6,9 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="../weather-icons-master/css/weather-icons-wind.min.css">
-    <link rel="stylesheet" href="../weather-icons-master/css/weather-icons.css">
-    <link rel="stylesheet" href="../weather-icons-master/css/weather-icons.min.css">
     <title>Document</title>
 </head>
 
@@ -26,55 +23,87 @@
 
 <div class="row">
     <div class = "column">
-        <canvas class="temp_chart">
-
-        </canvas>
+        <canvas class="temp_chart" id="TempChart"></canvas>
     </div>
     <div class = "column">
-        <canvas class="humidity_chart">
-
-        </canvas>
+        <canvas class="humidity_chart" id="HumChart"> </canvas>
     </div>
 </div>
 <div class="row">
     <div class="column">
-        <canvas class="pressure_chart">
-
-        </canvas>
+        <canvas class="pressure_chart" id="PresChart"></canvas>
     </div>
     <div class="column">
-        <div style="height: 400px; overflow-y:auto; border-radius: 10px;">
-            <?php
-            const DB_USER = 'test_user';
-            const DB_PSWD = '123';
-            const DB_HOST = '127.0.0.1';
-            const DB_NAME = 'test';
-            const DB_PORT = '3306';
-            date_default_timezone_set('Etc/GMT-3');
-            $date = date("Y-m-d");
-            $dbcon = mysqli_connect(DB_HOST, DB_USER, DB_PSWD, DB_NAME, DB_PORT);
-            $sqlget = "select time, temp, pres, humidity from weather where date = '" . $date . "'";
-            $sqldata = mysqli_query($dbcon, $sqlget) or die('error');
-
-            echo "<table class='table_weather'>";
-            echo "<tr><th>$date</th><th>Температура</th><th>Давление</th><th>Влажность</th>";
-
-            while ($row = mysqli_fetch_array($sqldata, MYSQLI_ASSOC)){
-                echo "<tr><td>";
-                echo $row['time'];
-                echo "</td><td>";
-                echo $row['temp'];
-                echo "</td><td>";
-                echo $row['pres'];
-                echo "</td><td>";
-                echo $row['humidity'];
-                echo "</td></tr>";
-            }
-
-            echo"</table>";
-            ?>
+        <div style="height: 350px; overflow-y:auto; border-radius: 10px;">
+            <?php include 'data_base.php';?>
         </div>
     </div>
 </div>
 
 <script type="text/javascript" src="current_date_time.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('TempChart');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [<?php echo join(', ', $array_time)?>],
+            datasets: [{
+                label: 'Temperature',
+                data: [<?php echo join(', ', $array_temp)?>],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    const ctx_2 = document.getElementById('PresChart');
+
+    new Chart(ctx_2, {
+        type: 'line',
+        data: {
+            labels: [<?php echo join(', ', $array_time)?>],
+            datasets: [{
+                label: 'Pressure in mmHG',
+                data: [<?php echo join(', ', $array_pres)?>],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    const ctx_3 = document.getElementById('HumChart');
+
+    new Chart(ctx_3, {
+        type: 'line',
+        data: {
+            labels: [<?php echo join(', ', $array_time)?>],
+            datasets: [{
+                label: 'Humidity',
+                data: [<?php echo join(', ', $array_hum);?>],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+</body>
