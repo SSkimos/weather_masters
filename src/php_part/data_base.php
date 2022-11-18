@@ -7,7 +7,7 @@ const DB_PORT = '3306';
 date_default_timezone_set('Etc/GMT-3');
 $date = date("Y-m-d");
 $dbcon = mysqli_connect(DB_HOST, DB_USER, DB_PSWD, DB_NAME, DB_PORT);
-$sqlget = "select time, temp, pres, humidity from weather where date = '" . $date . "'";
+$sqlget = "select time, temp, pres, humidity from weather where date = '" . $date . "' order by time";
 $sqldata = mysqli_query($dbcon, $sqlget) or die('error');
 $array_temp = [];
 $array_hum = [];
