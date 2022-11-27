@@ -1,6 +1,3 @@
-import psycopg2
-from config import username, password, db_name, host
-
 class DataBase:
     def __init__(self):
         pass

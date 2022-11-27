@@ -1,10 +1,9 @@
 # python 3.6
 
-import random
 import time
 
 from paho.mqtt import client as mqtt_client
-from config import broker, port, topic, client_id, username, password
+from src.test_docker.server.app.config import broker, port, topic, client_id, username, password
 
 def connect_mqtt():
     def on_connect(client, userdata, flags, rc):
