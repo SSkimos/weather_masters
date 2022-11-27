@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php include 'max_min_data.php';?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,9 +15,11 @@
         <div class="message_today">
             Weather Today
         </div>
-        <div class = "date_block">
-            <div id="current_date_time_block"></div>
-        </div>
+        <form class = "date_block">
+                <input type="date" name="calendar" value="<?php echo $max_data?>"
+                       max="<?php echo $max_data?>" min="<?php echo $min_data?>" , class="calendar_block">
+                <button type='button'>submit</button>
+        </form>
     </nav>
 </header>
 
