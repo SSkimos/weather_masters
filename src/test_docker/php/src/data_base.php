@@ -1,13 +1,14 @@
 <?php
-const DB_USER = 'test_user';
-const DB_PSWD = '123';
-const DB_HOST = '127.0.0.1';
-const DB_NAME = 'test';
-const DB_PORT = '3306';
-date_default_timezone_set('Etc/GMT-3');
-$date = date("Y-m-d");
-$dbcon = mysqli_connect(DB_HOST, DB_USER, DB_PSWD, DB_NAME, DB_PORT);
-$sqlget = "select time, temp, pres, humidity from weather where date = '" . $date . "' order by time";
+use const my\space\DB_NAME;
+use const my\space\DB_PSWD;
+use const my\space\DB_HOST;
+use const my\space\DB_USER;
+$dbcon = mysqli_connect(DB_HOST, DB_USER, DB_PSWD, DB_NAME);
+$sqlget = "select date(max(date)-1) as max_date from weather";
+$sqldata = mysqli_query($dbcon, $sqlget) or die('error');
+$row = mysqli_fetch_array($sqldata, MYSQLI_ASSOC);
+$max_date = $row['max_date'];
+$sqlget = "select time, temp, pres, humidity from weather where date = '" . $max_date . "' order by time";
 $sqldata = mysqli_query($dbcon, $sqlget) or die('error');
 $array_temp = [];
 $array_hum = [];

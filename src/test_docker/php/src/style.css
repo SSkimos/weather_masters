@@ -30,9 +30,20 @@ header {
     float: left;
 }
 .date_block {
-    margin: 0px 10px 0px 0px;
+    /*margin: 0px 10px 0px 0px;*/
+    margin: 0px 0px 0px 0px;
     position: relative;
     display: block;
+    color: #47717a;
+    font-size: 50px;
+    float: right;
+}
+
+.calendar_block{
+    margin: 0px 10px 0px 0px;
+    position: relative;
+    border-color: #47717a;
+    border-radius: 10px;
     color: #47717a;
     font-size: 50px;
     float: right;
