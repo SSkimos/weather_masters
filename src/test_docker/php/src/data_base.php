@@ -4,7 +4,7 @@ use const my\space\DB_PSWD;
 use const my\space\DB_HOST;
 use const my\space\DB_USER;
 $dbcon = mysqli_connect(DB_HOST, DB_USER, DB_PSWD, DB_NAME);
-$sqlget = "select date(max(date)-1) as max_date from weather";
+$sqlget = "select max(date) as max_date from weather";
 $sqldata = mysqli_query($dbcon, $sqlget) or die('error');
 $row = mysqli_fetch_array($sqldata, MYSQLI_ASSOC);
 $max_date = $row['max_date'];

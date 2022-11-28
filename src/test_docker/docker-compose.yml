@@ -13,8 +13,6 @@ services:
       - "3306:3306"
     volumes:
       - ./docker-entrypoint-initdb.d/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
-    networks:
-      - default
 
   php-apache-environment:
     container_name: php-apache
@@ -27,24 +25,3 @@ services:
       - ./php/src:/var/www/html/
     ports:
       - '8000:80'
-
-  server:
-    container_name: server
-    build: server/
-    ports:
-      - "5001:5001"
-    depends_on:
-      - db
-    networks:
-      - net
-      - default
-    environment:
-      - "DB_HOST=db"
-
-networks:
-    default:
-      external:
-        name: mysqlnet
-
-    net:
-      driver: bridge

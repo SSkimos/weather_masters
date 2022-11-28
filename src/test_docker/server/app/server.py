@@ -1,11 +1,8 @@
 # python3.6
 
 from fastapi import FastAPI
-import logging
-import psycopg2
 from datetime import datetime
 from paho.mqtt import client as mqtt_client
-import random
 import mysql.connector
 from mysql.connector import connect, Error
 
@@ -54,14 +51,10 @@ def subscribe(client: mqtt_client):
                         '{data_list[1]}'
                     )
                     """
-        cnx = mysql.connector.connect(
-            host="db",
-            port=3306,
-            user="test_user",
-            password="123"
-        )
+        cnx = mysql.connector.connect(host='localhost', password='123', username='test_user', database='test')
         cursor = cnx.cursor()
         cursor.execute(aboba, multi=True)
+        cursor.commit()
 
     client.subscribe(topic)
     client.on_message = on_message
@@ -75,3 +68,4 @@ def run():
 
 if __name__ == '__main__':
     run()
+
