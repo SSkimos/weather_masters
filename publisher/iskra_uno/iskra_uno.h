@@ -1,4 +1,5 @@
 #include <SoftwareSerial.h>
+#include <TroykaIMU.h>
 #include <TroykaDHT.h>
 
 #define DHTPIN 8
@@ -7,3 +8,4 @@
 
 SoftwareSerial esp (2, 3);
 DHT dht (DHTPIN, DHTTYPE);
+Barometer barometer;
