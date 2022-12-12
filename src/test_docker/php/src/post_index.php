@@ -17,8 +17,8 @@
         </div>
         <form class = "date_block", action="post_index.php", method="post">
             <label>
-                <input type="date" name="calendar" value="<?php echo $max_data?>"
-                       max="<?php echo $max_data?>" min="<?php echo $min_data?>" , class="calendar_block_n", onchange='this.form.submit()'>
+                <input type="date" name="calendar" value="<?php echo $_POST['calendar']?>"
+                       max="<?php echo $max_data?>" min="<?php echo $min_data?>" , class="calendar_block_n" onchange='this.form.submit()'>
             </label>
         </form>
     </nav>
@@ -38,7 +38,7 @@
     </div>
     <div class="column">
         <div style="height: 350px; overflow-y:auto; border-radius: 10px;">
-            <?php include 'data_base.php';?>
+            <?php include 'post_data_base.php';?>
         </div>
     </div>
 </div>

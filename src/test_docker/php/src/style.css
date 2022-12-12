@@ -17,7 +17,7 @@ body {
 header {
     width: 100%;
     padding: 15px 0;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
     position: relative;
 }
 
@@ -35,17 +35,26 @@ header {
     position: relative;
     display: block;
     color: #47717a;
-    font-size: 50px;
     float: right;
 }
 
-.calendar_block{
-    margin: 0px 10px 0px 0px;
+.calendar_block_n{
+    margin: 20px 10px 0px 0px;
     position: relative;
     border-color: #47717a;
     border-radius: 10px;
+    font-size: 25px;
     color: #47717a;
-    font-size: 50px;
+    float: right;
+}
+
+.button_block{
+    margin: 20px 10px 0px 0px;
+    position: relative;
+    border-color: #47717a;
+    border-radius: 10px;
+    font-size: 25px;
+    color: #47717a;
     float: right;
 }
 
