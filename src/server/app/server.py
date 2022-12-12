@@ -5,6 +5,7 @@ from datetime import datetime
 from paho.mqtt import client as mqtt_client
 import mysql.connector
 from mysql.connector import connect, Error
+import random
 
 app = FastAPI()
 
@@ -13,7 +14,7 @@ broker = '82.148.17.22'
 port = 1883
 topic = "Habr"
 # generate client ID with pub prefix randomly
-client_id = f'python-mqtt-10'
+client_id = f'python-mqtt-{random.randint(0, 100)}'
 username = 'IoT'
 password = '123'
 
@@ -36,7 +37,6 @@ def subscribe(client: mqtt_client):
     def on_message(client, userdata, msg):
         data_list = msg.payload.decode().split(' ')
         aboba = f"""
-                    USE test;
                     INSERT INTO weather (
                         date,
                         time,
@@ -49,12 +49,14 @@ def subscribe(client: mqtt_client):
                         '{data_list[0]}',
                         '{data_list[2]}',
                         '{data_list[1]}'
-                    )
+                    );
                     """
         cnx = mysql.connector.connect(host='localhost', password='123', username='test_user', database='test')
         cursor = cnx.cursor()
-        cursor.execute(aboba, multi=True)
-        cursor.commit()
+        cursor.close()
+        cursor = cnx.cursor()
+        cursor.execute(aboba)
+        cnx.commit()
 
     client.subscribe(topic)
     client.on_message = on_message
@@ -68,4 +70,3 @@ def run():
 
 if __name__ == '__main__':
     run()
-
