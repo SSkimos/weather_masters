@@ -205,3 +205,4 @@ create table weather
 -- insert into weather value (current_date() - INTERVAL 3 DAY, '21:30:00', '-6', '760', '58');
 -- insert into weather value (current_date() - INTERVAL 3 DAY, '22:30:00', '-6', '760', '59');
 -- insert into weather value (current_date() - INTERVAL 3 DAY, '23:30:00', '-6', '760', '61');
+

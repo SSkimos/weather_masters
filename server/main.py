@@ -45,3 +45,4 @@ finally:
     if connection:
         connection.close()
         print("[INFO] PostgreSQL connection closed")
+
